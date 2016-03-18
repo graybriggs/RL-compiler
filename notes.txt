@@ -1,0 +1,153 @@
+
+/////////////////
+/// Abstract base classes
+/////////////////
+
+class Visitor {
+public:
+    ~Visitor() {}
+
+    virtual void visit(Add) = 0;
+    virtual public void visit(Subtract) = 0;
+};
+
+class Expression {
+public:
+    void accept(Visitor v) = 0;
+};
+
+class Statement : public Visitor {
+public:
+    void accept(Visitor v) = 0;
+};
+
+
+/////////////////
+// Concrete classes
+/////////////////
+
+class Identifier : public Expression {
+  
+};
+
+class Add : public Expression {
+public:
+  Add(Expression v1, Expression v2) {}
+  
+  public void accept(Visitor v) {}
+
+private:
+  Expression value1, value2;
+}
+
+class Subtract : public Expression {
+public:
+  Add(Expression v1, Expression v2) {}
+  
+  public void accept(Visitor v) {}
+
+private:
+  Expression value1, value2;
+}
+
+/////////////////////
+
+class Assignment : public Statement {
+  
+
+}
+
+
+
+##########################
+### Language example
+##########################
+
+
+func add_one:
+  a = a + 1
+
+func print_details(var p)
+  print "Name: " ~ p.name ~ "\n"
+  print "Age: " ~ p.age ~ "\n"
+  print "Sex: " ~ p.sex ~ "\n"
+  print "Occupation: " ~ p.occupation ~ "\n"
+
+#-----------------
+
+var foo = 0
+var bar = 1
+var x = 5
+
+if x > foo:
+  x = x - 1
+  while 0:
+  end
+else:
+  x = x + bar
+end
+while x > 0:
+  x = x - 1
+end
+
+# Comments.
+# This is a comment
+# Comments are single line only and begin after the '#' character
+
+# This is okay:
+var num = 0 # assign the value 0 to variable num
+
+
+#
+# Builtins:
+#
+
+# integer values
+
+var num = 6
+var double_the_num = 2 * num
+var sum = 3 + 2 + num
+var num = 0 # reassignment
+
+# floating point values
+
+var pi = 3.14159
+var rad = 2 * pi
+var div = 3.0 / 2
+
+num = div # reassign num from earlier. It not holds a floating point value
+
+# Strings
+
+var str = "hello"
+var hw = str ~ ", world!" # demonstrating string contatenation
+str = str ~ " over there!"
+
+num = hw # remember the num from before? It's now a string. Reassignment at work.
+
+#
+# User defined types
+#
+
+var gender = type {
+  var male = "male"
+  var female = "female"
+}
+
+var person = type {
+  var name = "Graham"
+  var age = 21
+  var sex = gender.male
+  var occupation = "programmer"
+}
+
+print_person(person)
+
+
+var array[5]
+array[0] = 0
+array[1] = "a string!"
+array[2] = 3.14   # pi
+array[3] = p.name # string
+array[4] = p # my_own_type group type
+
